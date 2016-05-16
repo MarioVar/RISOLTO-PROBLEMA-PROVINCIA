@@ -99,21 +99,42 @@ $result_idee=$mysqli->query($SQLidee);
 		<h4>Modifica i tuoi dati</h4>
         <ul class="nav nav-tabs" id="mioTab">
 		  <li class="active"><a href="#personale" data-toggle="tab">Personale</a></li>
+		  <li><a href="#accesso" data-toggle="tab">Dati di Accesso</a></li>
 	      <li><a href="#contatti" data-toggle="tab">Contatti</a></li>
 	   </ul>
 	   
 	   <div class="tab-content">
  		   <div class="tab-pane active" id="personale"><h1></h1>
-  			 <form method="post" name="registra"  action="emodifica.php"  id="registra">
+  			 <form method="post" name="registra"  action="emodifica.php"  id="registra" enctype="multipart/form-data">
  				 <fieldset class="form-group">
  				  <label for="Nome">Ragione Sociale</label>
-    			<input type="nome" required class="form-control" id="nome" name="nome" value='<?php echo $dati["RAGIONE_SOCIALE"]; ?>' >
+    			<input type="nome" required class="form-control" id="nome" name="nome" value='<?php echo $dati["RAGIONE_SOCIALE"]?>' >
   				</fieldset>
-
+				
 				<fieldset class="form-group">
 				<label for="immagine">Immagine</label>
 				<input type="file"  class="form-control" name="immagine" id="immagine">
 				</fieldset>
+				
+				<?php /*
+					if (isset($_GET['errore']))
+					{
+						echo "<span style='color:red;>";
+						switch ($_GET['errore'])
+						{
+							case 1:
+								echo "Estensione non supportata.";
+							break;
+							case 2:
+								echo "Dimensione non supportata.";
+							break;
+							case 3:
+								echo "Impossibile caricare l'immagine.";
+							break;
+						}
+						echo "</span>";
+					}*/
+				?>
 				
   				<fieldset class="form-group">
   				  <label for="cap">Cap</label>
@@ -194,20 +215,43 @@ $result_idee=$mysqli->query($SQLidee);
     			<label for="sito_web">Sito web</label>
     			 <input type="text" class="form-control" id="sito_web" name="sito_web" value='<?php echo $dati_cont["SITO_WEB"]; ?>'>
   				</fieldset>
-  				
-				 <fieldset class="form-group">
-    			<label for="email">Email</label>
-    			 <input type="text" class="form-control" id="email" name="email" value='<?php echo $dati["EMAIL"]; ?>'>
-  				</fieldset>
     
   				<fieldset class="form-group">
   				 <label for="parlaci">Maggiori dettagli</label>
     			<textarea class="form-control" id="descrizione" name="descrizione" rows="3"><?php echo $dati["DESCRIZIONE"];?></textarea>
   				</fieldset>
   			</div>
+  			<div class="tab-pane" id="accesso"><h1></h1>
+				 <fieldset class="form-group">
+    			<label for="email">Nuova Email</label>
+    			 <input type="email" class="form-control" id="email" name="email" value=''>
+  				</fieldset>
+  				
+				 <fieldset class="form-group">
+    			<label for="email">Conferma Email</label>
+    			 <input type="email" class="form-control" id="conf_email" name="conf_email" value=''>
+  				</fieldset>
+  				
+				<div class="row">
+					<div class="col-md-6">
+						<fieldset class="form-group">
+						<label>Nuova Password</label>
+						<input type="password" class="form-control" id="password" name="password" class="txtField" required>
+						</fieldset>
+					</div>
+						
+					<div class="col-md-6">							
+						<fieldset class="form-group">
+						<label>Conferma Password</label>
+						<input type="password" class="form-control" id="conf_password" name="conf_password" class="txtField" required>
+						</fieldset>
+					</div>
+				</div>
+  			</div>
    			<input id="aggiorna" value="AGGIORNA" type="submit" name="aggiorna"></td>
  		 </form>
  	  </div>
+ 	  
    </div>
 </div>
   
